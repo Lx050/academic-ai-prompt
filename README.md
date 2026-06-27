@@ -10,6 +10,18 @@
 
 ---
 
+## 🌐 网页版
+
+仓库根目录已提供静态网页入口：`index.html`。
+
+- 本地预览：直接用浏览器打开 `index.html`
+- GitHub Pages：在仓库 `Settings → Pages` 中选择 `Deploy from a branch`，分支选 `main`，目录选 `/ (root)`
+- 启用后访问：`https://lx050.github.io/academic-ai-prompt/`
+
+页面只复用仓库现有 Markdown、Excel 和流程图资源，不需要安装依赖或运行构建命令。
+
+---
+
 ## 🎯 这个项目解决什么问题？
 
 如果你是研究生，可能遇到过这些困境：

@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="学术研究 AI Prompt 完整合集：覆盖论文选题、论文查找、文献综述和论文写作的研究工作流。">
+  <title>学术研究 AI Prompt 完整合集</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #181713;
+      --muted: #5f625c;
+      --paper: #f7f8f2;
+      --panel: #ffffff;
+      --line: #d8dbd2;
+      --jade: #08796b;
+      --jade-dark: #04594f;
+      --cinnabar: #b83d2f;
+      --gold: #c9891f;
+      --lilac: #6a5aa8;
+      --shadow: 0 18px 45px rgba(24, 23, 19, 0.14);
+      --radius: 8px;
+      --content: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(24, 23, 19, 0.035) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(0deg, rgba(24, 23, 19, 0.025) 1px, transparent 1px) 0 0 / 44px 44px,
+        var(--paper);
+      font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "Microsoft YaHei", serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(24, 23, 19, 0.76);
+      color: #fffdf4;
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      width: min(var(--content), calc(100% - 32px));
+      min-height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border: 2px solid currentColor;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      padding: 8px 10px;
+      border-radius: 6px;
+      color: rgba(255, 253, 244, 0.84);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      background: rgba(255, 253, 244, 0.12);
+      color: #fffdf4;
+      outline: none;
+    }
+
+    .hero {
+      min-height: 78vh;
+      display: grid;
+      align-items: end;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(8, 121, 107, 0.92) 0%, rgba(24, 23, 19, 0.76) 48%, rgba(24, 23, 19, 0.24) 100%),
+        url("flowchart_topic_selection.png") center / cover no-repeat;
+      color: #fffdf4;
+    }
+
+    /* Keep the hero image legible while making the text contrast stable. */
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 180px;
+      background: linear-gradient(180deg, transparent, var(--paper));
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(var(--content), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 104px 0 120px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #f8e8b8;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 42px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-size: clamp(42px, 8vw, 88px);
+      line-height: 1.04;
+      letter-spacing: 0;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .title-line {
+      display: inline;
+    }
+
+    .title-line + .title-line::before {
+      content: " ";
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      margin: 24px 0 0;
+      font-size: clamp(18px, 2vw, 24px);
+      color: rgba(255, 253, 244, 0.9);
+      overflow-wrap: anywhere;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      padding: 10px 16px;
+      font-weight: 800;
+      transition: transform 160ms ease, background 160ms ease, color 160ms ease, border-color 160ms ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .button.primary {
+      background: #fffdf4;
+      color: var(--ink);
+    }
+
+    .button.secondary {
+      border-color: rgba(255, 253, 244, 0.42);
+      color: #fffdf4;
+    }
+
+    .button.secondary:hover,
+    .button.secondary:focus-visible {
+      border-color: #fffdf4;
+      background: rgba(255, 253, 244, 0.1);
+    }
+
+    .section {
+      padding: 84px 0;
+    }
+
+    .section.alt {
+      background:
+        linear-gradient(135deg, rgba(8, 121, 107, 0.08), rgba(184, 61, 47, 0.06)),
+        #f0f3ec;
+    }
+
+    .section.dark {
+      background: #1f211c;
+      color: #fffdf4;
+    }
+
+    .wrap {
+      width: min(var(--content), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(280px, 0.45fr);
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .section-kicker {
+      margin: 0 0 10px;
+      color: var(--cinnabar);
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .section.dark .section-kicker {
+      color: #f0c56b;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(30px, 4.8vw, 56px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .section.dark .lead {
+      color: rgba(255, 253, 244, 0.74);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: -52px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat {
+      min-height: 132px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--jade-dark);
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      counter-reset: stage;
+    }
+
+    .stage-card {
+      counter-increment: stage;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: 0 14px 32px rgba(24, 23, 19, 0.08);
+      overflow: hidden;
+    }
+
+    .stage-card::before {
+      content: "0" counter(stage);
+      padding: 18px 20px 0;
+      color: var(--stage-color);
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .stage-card.topic {
+      --stage-color: var(--jade);
+    }
+
+    .stage-card.find {
+      --stage-color: var(--cinnabar);
+    }
+
+    .stage-card.review {
+      --stage-color: var(--lilac);
+    }
+
+    .stage-card.write {
+      --stage-color: var(--gold);
+    }
+
+    .stage-body {
+      padding: 8px 20px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stage-card h3 {
+      margin: 0;
+      font-size: 25px;
+      line-height: 1.24;
+      letter-spacing: 0;
+    }
+
+    .stage-card p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .stage-card ul {
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      color: #343630;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+    }
+
+    .stage-card li {
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .stage-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--stage-color);
+    }
+
+    .stage-links {
+      display: grid;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 22px;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .stage-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 38px;
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+      color: var(--stage-color);
+    }
+
+    .stage-links a::after {
+      content: ">";
+      font-family: Consolas, monospace;
+    }
+
+    .stage-links a:hover,
+    .stage-links a:focus-visible {
+      color: var(--ink);
+      outline: none;
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .visual {
+      border: 1px solid rgba(255, 253, 244, 0.14);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(255, 253, 244, 0.06);
+    }
+
+    .visual img {
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(255, 253, 244, 0.14);
+    }
+
+    .visual figcaption {
+      margin: 0;
+      padding: 14px 16px 16px;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-weight: 800;
+    }
+
+    .matrix {
+      display: grid;
+      gap: 12px;
+    }
+
+    .file-row {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      min-height: 72px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.76);
+    }
+
+    .file-type {
+      color: var(--cinnabar);
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .file-row strong {
+      display: block;
+      line-height: 1.4;
+    }
+
+    .file-row span {
+      display: block;
+      color: var(--muted);
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 13px;
+    }
+
+    .file-row a {
+      min-width: 82px;
+      border: 1px solid var(--ink);
+      border-radius: 6px;
+      padding: 7px 12px;
+      text-align: center;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .file-row a:hover,
+    .file-row a:focus-visible {
+      background: var(--ink);
+      color: #fffdf4;
+      outline: none;
+    }
+
+    .guidance {
+      display: grid;
+      grid-template-columns: 0.7fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .path-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      background: var(--panel);
+    }
+
+    .path-panel h3 {
+      margin: 0 0 16px;
+      font-size: 28px;
+      line-height: 1.2;
+    }
+
+    .path-panel ol {
+      margin: 0;
+      padding-left: 22px;
+      font-family: "Microsoft YaHei", sans-serif;
+    }
+
+    .path-panel li + li {
+      margin-top: 10px;
+    }
+
+    .note-strip {
+      display: grid;
+      gap: 14px;
+      align-content: center;
+      border-left: 4px solid var(--jade);
+      padding: 12px 0 12px 24px;
+    }
+
+    .note-strip p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .site-footer {
+      padding: 34px 0 46px;
+      background: #181713;
+      color: rgba(255, 253, 244, 0.78);
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      width: min(var(--content), calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-inner a {
+      color: #fffdf4;
+      font-weight: 800;
+    }
+
+    @media (max-width: 980px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .section-head,
+      .guidance {
+        grid-template-columns: 1fr;
+      }
+
+      .stats,
+      .workflow,
+      .visual-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .file-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .file-row a {
+        width: fit-content;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        min-height: 72vh;
+      }
+
+      .hero-inner {
+        padding: 92px 0 92px;
+      }
+
+      h1 {
+        font-size: clamp(32px, 9.6vw, 40px);
+        line-height: 1.12;
+      }
+
+      .title-line {
+        display: block;
+      }
+
+      .title-line + .title-line::before {
+        content: "";
+      }
+
+      .hero-copy {
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .section {
+        padding: 58px 0;
+      }
+
+      .stats,
+      .workflow,
+      .visual-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat,
+      .stage-card {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" aria-label="页面导航">
+    <nav class="nav">
+      <a class="brand" href="#top" aria-label="回到顶部">
+        <span class="brand-mark">AI</span>
+        <span>Academic Prompt</span>
+      </a>
+      <div class="nav-links">
+        <a href="#workflow">研究流程</a>
+        <a href="#flowcharts">流程图</a>
+        <a href="#files">文件入口</a>
+        <a href="#start">开始使用</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">v2.1 / 中文 Prompt 库</p>
+        <h1><span class="title-line">学术研究 AI</span><span class="title-line">Prompt 完整合集</span></h1>
+        <p class="hero-copy">
+          一套面向研究生和学术研究者的全流程工具箱，从论文选题、论文查找、文献综述到顶刊写作，把分散的研究动作整理成可以直接执行的 Prompt 工作流。
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#workflow">查看研究流程</a>
+          <a class="button secondary" href="README.md">打开项目 README</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" aria-label="项目规模">
+      <div class="stats">
+        <div class="stat">
+          <strong>89+</strong>
+          <span>覆盖全流程的 Prompt</span>
+        </div>
+        <div class="stat">
+          <strong>165k+</strong>
+          <span>中文指导内容字数</span>
+        </div>
+        <div class="stat">
+          <strong>3</strong>
+          <span>可视化研究流程图</span>
+        </div>
+        <div class="stat">
+          <strong>50-70%</strong>
+          <span>README 标注的研究时间节省</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">WORKFLOW</p>
+            <h2>按研究阶段组织，而不是把 Prompt 堆在一起</h2>
+          </div>
+          <p class="lead">
+            页面保留仓库原本的四段式结构。每一段都链接到真实 Markdown 文件或 Excel 工具，方便直接进入复制、筛选和使用。
+          </p>
+        </div>
+
+        <div class="workflow">
+          <article class="stage-card topic">
+            <div class="stage-body">
+              <h3>论文选题</h3>
+              <p>从广泛生成候选到深度分析 Top 选题，帮助用户把“想方向”变成可讨论、可评分、可落地的选题方案。</p>
+              <ul>
+                <li>生成 100 个选题候选</li>
+                <li>5 维度评估与筛选</li>
+                <li>导师讨论稿与论证模板</li>
+              </ul>
+              <div class="stage-links">
+                <a href="论文选题系列/论文选题AI提示词库.md">选题 Prompt 库</a>
+                <a href="论文选题系列/论文选题论证方案模板.md">论证方案模板</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="stage-card find">
+            <div class="stage-body">
+              <h3>论文查找</h3>
+              <p>用 AI 快速形成论文清单、搜索式和阅读优先级，再回到 Google Scholar 等数据库做人工验证。</p>
+              <ul>
+                <li>8 个快速找论文方案</li>
+                <li>搜索策略和期刊会议定位</li>
+                <li>论文筛选与分类整理</li>
+              </ul>
+              <div class="stage-links">
+                <a href="论文查找系列/AI直接找论文的Prompt.md">AI 直接找论文</a>
+                <a href="论文查找系列/论文查找和文献综述AI提示词库.md">查找与综述库</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="stage-card review">
+            <div class="stage-body">
+              <h3>文献综述</h3>
+              <p>从框架设计、论文提炼、主体写作到质量检查，强调研究脉络和研究空白，而不只是摘要堆叠。</p>
+              <ul>
+                <li>综述框架设计</li>
+                <li>多篇论文对比分析</li>
+                <li>质量检查与可读性优化</li>
+              </ul>
+              <div class="stage-links">
+                <a href="文献综述系列/文献综述AI提示词库.md">文献综述 Prompt 库</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="stage-card write">
+            <div class="stage-body">
+              <h3>论文写作</h3>
+              <p>面向高质量论文写作，覆盖创新评估、论文结构、标题摘要、方法结果、讨论结论和文本优化。</p>
+              <ul>
+                <li>34+ 写作 Prompt</li>
+                <li>9 个文本润色与表达 Prompt</li>
+                <li>顶刊叙事和图表优化</li>
+              </ul>
+              <div class="stage-links">
+                <a href="论文撰写系列/顶刊论文写作AI提示词库-2.md">顶刊写作 Prompt 库</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="flowcharts" class="section dark">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">FLOWCHARTS</p>
+            <h2>已有流程图直接作为网页视觉入口</h2>
+          </div>
+          <p class="lead">
+            仓库包含 3 张 2560 x 1440 流程图，分别对应选题、查找和综述。页面直接复用原图，避免重新绘制导致信息偏差。
+          </p>
+        </div>
+
+        <div class="visual-grid">
+          <figure class="visual">
+            <a href="flowchart_topic_selection.png">
+              <img src="flowchart_topic_selection.png" alt="论文选题流程图">
+            </a>
+            <figcaption>论文选题流程</figcaption>
+          </figure>
+          <figure class="visual">
+            <a href="flowchart_paper_finding.png">
+              <img src="flowchart_paper_finding.png" alt="论文查找流程图">
+            </a>
+            <figcaption>论文查找流程</figcaption>
+          </figure>
+          <figure class="visual">
+            <a href="flowchart_literature_review.png">
+              <img src="flowchart_literature_review.png" alt="文献综述流程图">
+            </a>
+            <figcaption>文献综述流程</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="files" class="section alt">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">LIBRARY</p>
+            <h2>真实文件入口</h2>
+          </div>
+          <p class="lead">
+            这里列出的都是当前仓库中存在的文件。Markdown 文件用于阅读和复制 Prompt，Excel 文件用于选题评分。
+          </p>
+        </div>
+
+        <div class="matrix">
+          <div class="file-row">
+            <div class="file-type">选题 / Markdown</div>
+            <div>
+              <strong>论文选题AI提示词库.md</strong>
+              <span>20+ 个选题生成、优化、分析和导师讨论 Prompt</span>
+            </div>
+            <a href="论文选题系列/论文选题AI提示词库.md">打开</a>
+          </div>
+          <div class="file-row">
+            <div class="file-type">选题 / Excel</div>
+            <div>
+              <strong>论文选题5维度评估表.xlsx</strong>
+              <span>用于候选选题的评分、排序和筛选</span>
+            </div>
+            <a href="论文选题系列/论文选题5维度评估表.xlsx">下载</a>
+          </div>
+          <div class="file-row">
+            <div class="file-type">查找 / Markdown</div>
+            <div>
+              <strong>AI直接找论文的Prompt.md</strong>
+              <span>8 个从 3 分钟到 10 分钟的论文推荐和对标方案</span>
+            </div>
+            <a href="论文查找系列/AI直接找论文的Prompt.md">打开</a>
+          </div>
+          <div class="file-row">
+            <div class="file-type">综述 / Markdown</div>
+            <div>
+              <strong>文献综述AI提示词库.md</strong>
+              <span>框架设计、内容提炼、综述写作、高级技巧和质量检查</span>
+            </div>
+            <a href="文献综述系列/文献综述AI提示词库.md">打开</a>
+          </div>
+          <div class="file-row">
+            <div class="file-type">写作 / Markdown</div>
+            <div>
+              <strong>顶刊论文写作AI提示词库-2.md</strong>
+              <span>创新性、结构、摘要、结果、讨论、图表和文本优化</span>
+            </div>
+            <a href="论文撰写系列/顶刊论文写作AI提示词库-2.md">打开</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="start" class="section">
+      <div class="wrap">
+        <div class="guidance">
+          <div class="path-panel">
+            <h3>最快开始路径</h3>
+            <ol>
+              <li>需要确定题目：打开选题 Prompt 库，先用 Prompt 1.1。</li>
+              <li>题目已经确定：打开 AI 直接找论文的 Prompt，用方案八快速拉清单。</li>
+              <li>准备写综述：打开文献综述库，从框架设计开始。</li>
+              <li>进入论文成稿：打开顶刊写作库，先做创新性和结构检查。</li>
+            </ol>
+          </div>
+          <div class="note-strip">
+            <p><strong>使用边界：</strong>AI 可以加速生成方向、清单和结构，但论文信息、引用、数据和关键判断仍然需要人工验证。</p>
+            <p><strong>页面边界：</strong>本页是静态入口，不修改原 Prompt 内容，不引入构建工具，不依赖外部脚本。</p>
+            <p><strong>仓库：</strong><a href="https://github.com/Lx050/academic-ai-prompt">github.com/Lx050/academic-ai-prompt</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>学术研究 AI Prompt 完整合集 v2.1</span>
+      <span>MIT License · Static GitHub Pages entry</span>
+    </div>
+  </footer>
+</body>
+</html>
